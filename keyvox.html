@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="KeyVox - Agencia de marketing digital. Web, Ads, WhatsApp, CRM, contenido con IA y crecimiento medible." />
+  <link rel="icon" type="image/png" href="keyvoxlogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="keyvoxlogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="keyvoxlogo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="keyvoxlogo.png">
+
+  <title>KeyVox | Agencia de Marketing Digital</title>
+
+  <style>
+    :root{
+      --bg:#060615;
+      --card:#0b0b1f;
+      --text:#e9e8ff;
+      --muted:#b9b6e6;
+      --lila:#a855f7;
+      --azul:#3b82f6;
+      --cian:#22d3ee;
+      --ok:#34d399;
+      --warn:#f59e0b;
+      --danger:#fb7185;
+
+      --ring: 0 0 0 1px rgba(168,85,247,.25), 0 0 40px rgba(59,130,246,.18);
+      --shadow: 0 12px 50px rgba(0,0,0,.45);
+      --radius: 22px;
+      --radius2: 28px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(168,85,247,.20), transparent 55%),
+        radial-gradient(800px 500px at 85% 15%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 600px at 50% 85%, rgba(34,211,238,.12), transparent 60%),
+        linear-gradient(180deg, #050512 0%, #070726 35%, #050512 100%);
+      overflow-x:hidden;
+    }
+
+    /* subtle grain */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.20"/></svg>');
+      mix-blend-mode:overlay;
+      opacity:.18;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{position:relative; z-index:1}
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(6,6,21,.55);
+      border-bottom:1px solid rgba(168,85,247,.18);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 18px;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:14px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.25), transparent 55%),
+        linear-gradient(135deg, rgba(168,85,247,1), rgba(59,130,246,1));
+      box-shadow: 0 10px 30px rgba(168,85,247,.20), 0 10px 30px rgba(59,130,246,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, rgba(255,255,255,.0), rgba(255,255,255,.25), rgba(255,255,255,.0));
+      transform: rotate(15deg);
+      animation: shimmer 6.5s linear infinite;
+      opacity:.7;
+    }
+    @keyframes shimmer{
+      0%{transform:translateX(-25%) rotate(15deg)}
+      100%{transform:translateX(25%) rotate(15deg)}
+    }
+
+    .nav-links{
+      display:flex; gap:16px; align-items:center;
+      font-size:14px;
+      color:rgba(233,232,255,.86);
+    }
+    .nav-links a{
+      padding:9px 10px; border-radius:12px;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .nav-links a:hover{
+      background: rgba(168,85,247,.10);
+      transform: translateY(-1px);
+      color:#fff;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:700;
+      font-size:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-primary{
+      border:1px solid rgba(168,85,247,.35);
+      background: linear-gradient(135deg, rgba(168,85,247,.85), rgba(59,130,246,.85));
+      box-shadow: 0 20px 60px rgba(168,85,247,.18), 0 20px 60px rgba(59,130,246,.14);
+    }
+    .btn-primary:hover{
+      background: linear-gradient(135deg, rgba(168,85,247,.95), rgba(59,130,246,.92));
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.03);
+    }
+
+    /* HERO */
+    header.hero{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:72px 18px 28px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:26px;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(168,85,247,.25);
+      background: rgba(168,85,247,.07);
+      color: rgba(233,232,255,.92);
+      font-size:13px;
+      width:fit-content;
+      box-shadow: var(--ring);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: linear-gradient(180deg, var(--lila), var(--azul));
+      box-shadow: 0 0 20px rgba(168,85,247,.5);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(36px, 4vw, 54px);
+      line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    .grad{
+      background: linear-gradient(90deg, rgba(168,85,247,1), rgba(59,130,246,1), rgba(34,211,238,1));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .lead{
+      margin: 0 0 18px;
+      color: rgba(233,232,255,.80);
+      font-size: 16.5px;
+      line-height:1.6;
+      max-width: 60ch;
+    }
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .hero-meta{
+      margin-top:18px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color: rgba(233,232,255,.70);
+      font-size:13px;
+    }
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+
+    .hero-card{
+      border-radius: var(--radius2);
+      background:
+        radial-gradient(500px 240px at 20% 10%, rgba(168,85,247,.22), transparent 60%),
+        radial-gradient(520px 260px at 90% 20%, rgba(59,130,246,.18), transparent 60%),
+        rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: conic-gradient(from 180deg, rgba(168,85,247,.0), rgba(168,85,247,.25), rgba(59,130,246,.22), rgba(34,211,238,.18), rgba(168,85,247,.0));
+      opacity:.35;
+      filter: blur(12px);
+      z-index:0;
+    }
+    .hero-card > *{position:relative; z-index:1}
+    .kpi-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    .kpi{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(6,6,21,.55);
+      padding:12px;
+    }
+    .kpi b{display:block; font-size:18px; margin-bottom:4px}
+    .kpi span{color:rgba(233,232,255,.72); font-size:12.5px}
+
+    /* SECTION */
+    section{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 34px 18px;
+    }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:16px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:28px;
+      letter-spacing:-.3px;
+    }
+    .section-title p{
+      margin:0;
+      color: rgba(233,232,255,.72);
+      max-width:64ch;
+      line-height:1.55;
+      font-size:14.5px;
+    }
+
+    .grid{
+      display:grid;
+      gap:14px;
+    }
+    .grid-3{ grid-template-columns: repeat(3, 1fr); }
+    .grid-2{ grid-template-columns: repeat(2, 1fr); }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 8px 34px rgba(0,0,0,.25);
+      padding:16px;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(168,85,247,.25);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+    }
+    .icon{
+      width:42px; height:42px;
+      border-radius:16px;
+      background: linear-gradient(135deg, rgba(168,85,247,.20), rgba(59,130,246,.18));
+      border:1px solid rgba(168,85,247,.25);
+      display:grid; place-items:center;
+      margin-bottom:10px;
+      box-shadow: var(--ring);
+      font-size:18px;
+    }
+    .card h3{margin:0 0 8px; font-size:16px}
+    .card p{margin:0; color:rgba(233,232,255,.72); line-height:1.55; font-size:13.8px}
+
+    .tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .tag{
+      font-size:12px;
+      color:rgba(233,232,255,.75);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+    }
+
+    /* PROCESS */
+    .steps{counter-reset: step}
+    .step{
+      position:relative;
+      padding-left:52px;
+      min-height:44px;
+    }
+    .step:before{
+      counter-increment: step;
+      content: counter(step);
+      position:absolute; left:0; top:0;
+      width:38px; height:38px;
+      border-radius:14px;
+      display:grid; place-items:center;
+      font-weight:800;
+      background: linear-gradient(135deg, rgba(168,85,247,.85), rgba(59,130,246,.85));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 50px rgba(168,85,247,.18), 0 18px 50px rgba(59,130,246,.14);
+    }
+    .step h4{margin:0 0 6px; font-size:15px}
+    .step p{margin:0; color:rgba(233,232,255,.72); font-size:13.6px; line-height:1.55}
+
+    /* PRICING */
+    .price{
+      background:
+        radial-gradient(700px 260px at 20% 0%, rgba(168,85,247,.20), transparent 65%),
+        radial-gradient(700px 260px at 90% 0%, rgba(59,130,246,.18), transparent 65%),
+        rgba(255,255,255,.03);
+      border:1px solid rgba(168,85,247,.22);
+      box-shadow: var(--shadow);
+    }
+    .price .top{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .price b{font-size:22px}
+    .price small{color:rgba(233,232,255,.70)}
+    .list{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:10px}
+    .list li{
+      display:flex; gap:10px;
+      color:rgba(233,232,255,.78);
+      font-size:13.7px;
+      line-height:1.45;
+    }
+    .check{
+      width:18px; height:18px; border-radius:8px;
+      background: rgba(52,211,153,.12);
+      border:1px solid rgba(52,211,153,.35);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+      margin-top:1px;
+      color: var(--ok);
+      font-weight:900;
+      font-size:12px;
+    }
+
+    /* CONTACT */
+    .contact{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      align-items:start;
+    }
+    .form{
+      display:grid; gap:10px;
+    }
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(6,6,21,.55);
+      color: var(--text);
+      outline:none;
+      box-shadow: 0 0 0 0 rgba(168,85,247,0);
+      transition: box-shadow .15s ease, border-color .15s ease;
+      font-size:14px;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(168,85,247,.35);
+      box-shadow: 0 0 0 4px rgba(168,85,247,.12);
+    }
+    textarea{min-height:110px; resize:vertical}
+
+    .note{
+      margin-top:10px;
+      color: rgba(233,232,255,.68);
+      font-size:12.8px;
+      line-height:1.55;
+    }
+
+    footer{
+      padding: 26px 18px 48px;
+      color: rgba(233,232,255,.62);
+      border-top:1px solid rgba(255,255,255,.08);
+      background: rgba(6,6,21,.35);
+    }
+    footer .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      header.hero{grid-template-columns:1fr; padding-top:54px}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+
+    /* tiny floating lights */
+    .float{
+      position:absolute; border-radius:999px; filter: blur(0px);
+      opacity:.6;
+      animation: drift 9s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .f1{ width:10px; height:10px; background: rgba(168,85,247,.65); left:7%; top:22%;}
+    .f2{ width:7px; height:7px; background: rgba(59,130,246,.55); left:88%; top:28%; animation-duration: 11s;}
+    .f3{ width:9px; height:9px; background: rgba(34,211,238,.45); left:54%; top:82%; animation-duration: 13s;}
+    @keyframes drift{
+      0%,100%{ transform: translate(0,0) }
+      50%{ transform: translate(0,-12px) }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="float f1"></div><div class="float f2"></div><div class="float f3"></div>
+
+    <!-- NAV -->
+    <nav class="nav" aria-label="Navegación principal">
+      <div class="nav-inner">
+        <div class="brand">
+        <a href="#top" style="display:flex;align-items:center;gap:10px;">
+         <img src="keyvoxlogo.png" alt="KeyVox logo" style="height:100px;width:auto;">
+        </a>
+        <div class="nav-links">
+          <a href="#servicios">Servicios</a>
+          <a href="#metodo">Método</a>
+          <a href="#casos">Resultados</a>
+          <a href="#planes">Planes</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="#planes">Ver plan 90 días</a>
+          <a class="btn btn-primary" href="#contacto">Agendar diagnóstico</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div>
+        <div class="badge"><span class="dot"></span> Marketing que se ve, se mide y se sostiene</div>
+        <h1>Hacemos crecer tu negocio con <span class="grad">Web + Ads + Contenido + WhatsApp/CRM</span></h1>
+        <p class="lead">
+          KeyVox es una agencia enfocada en performance: diseñamos tu presencia digital, automatizamos la conversión
+          (mensajes, listas, CRM) y escalamos con anuncios en Meta y TikTok. Todo con narrativa directa y creatividades de alto impacto.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contacto">Quiero un plan para mi negocio</a>
+          <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+        </div>
+
+        <div class="hero-meta">
+          <span class="pill">✅ Copy persuasivo</span>
+          <span class="pill">✅ Reels/Ads de alto impacto</span>
+          <span class="pill">✅ Embudos WhatsApp</span>
+          <span class="pill">✅ Web profesional</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="font-weight:800; font-size:25px;">RUTA DE CRECIMIENTO</div>
+            <div style="color:rgba(233,232,255,.70); font-size:13px; margin-top:4px;">
+              Conversaciones calificadas → ventas → recompra
+      </div>
+          </div>
+          <img src="keyvoxlogo.png" alt="KeyVox logo" style="height:150px;width:auto;">
+          </div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <b>+Leads</b>
+            <span>Meta/TikTok → WhatsApp/DM</span>
+          </div>
+          <div class="kpi">
+            <b>+Cierres</b>
+            <span>Scripts + velocidad + follow-up</span>
+          </div>
+          <div class="kpi">
+            <b>+Recompra</b>
+            <span>Listas + CRM + promos</span>
+          </div>
+          <div class="kpi">
+            <b>+Autoridad</b>
+            <span>Web + prueba social + contenido</span>
+          </div>
+        </div>
+
+        <div class="tagrow">
+          <span class="tag">Web & Landing Pages</span>
+          <span class="tag">Meta Ads</span>
+          <span class="tag">TikTok Ads</span>
+          <span class="tag">WhatsApp Automation</span>
+          <span class="tag">CRM & Listas</span>
+          <span class="tag">IA Creativa</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+      <div class="section-title">
+        <div>
+          <h2>Servicios</h2>
+          <p>Todo lo necesario para convertir presencia digital en ventas: estrategia, ejecución y optimización.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="icon">🌐</div>
+          <h3>Web profesional & Landing Pages</h3>
+          <p>Web seria y rápida orientada a conversión (WhatsApp, formularios, SEO local, páginas de servicios y casos).</p>
+          <div class="tagrow">
+            <span class="tag">WordPress / HTML</span><span class="tag">SEO local</span><span class="tag">CRO</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="icon">📣</div>
+          <h3>Meta Ads (Facebook/Instagram)</h3>
+          <p>Campañas de performance: Click-to-WhatsApp, Leads, Remarketing y Creatividades por ángulo de venta.</p>
+          <div class="tagrow">
+            <span class="tag">Prospección</span><span class="tag">Retarget</span><span class="tag">Optimización</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="icon">🎬</div>
+          <h3>TikTok Ads & UGC de impacto</h3>
+          <p>Creativos verticales con hooks fuertes, guiones direct response y anuncios diseñados para scroll-stopping.</p>
+          <div class="tagrow">
+            <span class="tag">Hooks</span><span class="tag">UGC</span><span class="tag">Performance</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="icon">💬</div>
+          <h3>WhatsApp Automation & Scripts</h3>
+          <p>Menús, mensajes automáticos, respuestas rápidas, guiones de cierre y follow-up para aumentar conversiones.</p>
+          <div class="tagrow">
+            <span class="tag">WhatsApp Business</span><span class="tag">API (opcional)</span><span class="tag">Cierres</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="icon">🗂️</div>
+          <h3>CRM & Base de Datos (Mayorista/Minorista)</h3>
+          <p>Segmentación por tipo de cliente, historial, ticket y frecuencia. Listas para promos y reactivación.</p>
+          <div class="tagrow">
+            <span class="tag">Sheets/Notion</span><span class="tag">Pipeline</span><span class="tag">Recompra</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="icon">✨</div>
+          <h3>Contenido + IA (Midjourney/Edición)</h3>
+          <p>Creatividad visual premium + edición y motion para Reels/Ads. Branding consistente y estética de alto impacto.</p>
+          <div class="tagrow">
+            <span class="tag">Midjourney</span><span class="tag">Edición</span><span class="tag">Branding</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- METODO -->
+    <section id="metodo">
+      <div class="section-title">
+        <div>
+          <h2>Método KeyVox</h2>
+          <p>Un sistema de 90 días para instalar orden, convertir consultas y escalar con anuncios sin improvisación.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card steps">
+          <div class="step">
+            <h4>Diagnóstico y oferta (Semana 1)</h4>
+            <p>Auditoría, avatar, propuesta de valor, ángulos de venta, mensajes y estructura del embudo.</p>
+          </div>
+          <div class="step" style="margin-top:14px;">
+            <h4>Infraestructura (Semana 2–3)</h4>
+            <p>Web/landing, WhatsApp automatizado, base de datos/CRM y guiones comerciales.</p>
+          </div>
+          <div class="step" style="margin-top:14px;">
+            <h4>Contenido y creatividades (Semana 3–4)</h4>
+            <p>Producción por lotes: Reels, anuncios, historias, carruseles y prueba social.</p>
+          </div>
+          <div class="step" style="margin-top:14px;">
+            <h4>Escala con Ads (Mes 2–3)</h4>
+            <p>Campañas Meta/TikTok, testing de creativos, retargeting y optimización por métricas.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎯</div>
+          <h3>Lo que medimos</h3>
+          <p>En KeyVox no “hacemos posteos”; construimos un sistema. Estas son las métricas que importan:</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Conversaciones calificadas (WhatsApp/DM)</li>
+            <li><span class="check">✓</span> Costo por conversación y tasa de respuesta</li>
+            <li><span class="check">✓</span> Tasa de cierre (pedidos / ventas)</li>
+            <li><span class="check">✓</span> Ticket promedio y frecuencia de recompra</li>
+            <li><span class="check">✓</span> Reactivación de clientes inactivos</li>
+          </ul>
+          <div class="hero-actions" style="margin-top:14px;">
+            <a class="btn btn-primary" href="#contacto">Solicitar diagnóstico</a>
+            <a class="btn btn-ghost" href="#planes">Ver planes</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTADOS / CASOS (placeholders) -->
+    <section id="casos">
+      <div class="section-title">
+        <div>
+          <h2>Resultados esperables</h2>
+          <p>Sin promesas vacías: trabajamos con rangos y objetivos medibles según rubro, respuesta y presupuesto de anuncios.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <div class="icon">📈</div>
+          <h3>Más consultas útiles</h3>
+          <p>Instalamos CTAs y automatizaciones para que el mensaje llegue con intención: “quiero precios / quiero compra mayorista”.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🧲</div>
+          <h3>Más conversiones</h3>
+          <p>Scripts de cierre, velocidad de respuesta y seguimiento. Menos “hola”, más cierres y recompras.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🏗️</div>
+          <h3>Más seriedad (y marca)</h3>
+          <p>Web profesional + estética consistente. Una marca que se ve grande, vende grande.</p>
+        </article>
+      </div>
+
+      <p class="note" style="margin-top:14px;">
+        Nota: los resultados dependen del rubro, operación, precios, stock, tiempos de respuesta y presupuesto publicitario.
+      </p>
+    </section>
+
+    <!-- PLANES -->
+    <section id="planes">
+      <div class="section-title">
+        <div>
+          <h2>Plan 90 días (implementación)</h2>
+          <p>Ideal para instalar el sistema completo: web + embudo WhatsApp + contenido + campañas + CRM.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card price">
+          <div class="top">
+            <div>
+              <b>KeyVox Growth 90</b><br />
+              <small>Implementación completa + operación</small>
+            </div>
+            <span class="tag" style="border-color:rgba(168,85,247,.25);">Más elegido</span>
+          </div>
+
+          <ul class="list">
+            <li><span class="check">✓</span> Web/landing de conversión (estructura + copy + CTAs)</li>
+            <li><span class="check">✓</span> WhatsApp automatizado + guiones de cierre</li>
+            <li><span class="check">✓</span> CRM + base de datos + segmentación de listas</li>
+            <li><span class="check">✓</span> Contenido mensual (Reels, posts, historias)</li>
+            <li><span class="check">✓</span> Meta Ads + TikTok Ads (config y optimización)</li>
+            <li><span class="check">✓</span> Reportes y optimización semanal</li>
+          </ul>
+
+          <div class="hero-actions" style="margin-top:14px;">
+            <a class="btn btn-primary" href="#contacto">Cotizar para mi negocio</a>
+            <a class="btn btn-ghost" href="#contacto" onclick="prefillPlan('KeyVox Growth 90')">Quiero este plan</a>
+          </div>
+
+          <p class="note">
+            * No incluye: dominio/hosting, costos publicitarios ni herramientas externas (según stack elegido).
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🛠️</div>
+          <h3>Mantenimiento mensual (opcional)</h3>
+          <p>Luego de los 90 días, pasamos a modo “operación y escala”: contenido, community, ads y mejora continua.</p>
+          <ul class="list">
+            <li><span class="check">✓</span> Gestión de redes (CM) + calendario</li>
+            <li><span class="check">✓</span> Creatividades y edición mensual</li>
+            <li><span class="check">✓</span> Optimización de campañas</li>
+            <li><span class="check">✓</span> Gestión de listas / reactivación</li>
+            <li><span class="check">✓</span> Reporte mensual ejecutivo</li>
+          </ul>
+          <div class="hero-actions" style="margin-top:14px;">
+            <a class="btn btn-primary" href="#contacto" onclick="prefillPlan('Mantenimiento mensual')">Pedir propuesta</a>
+            <a class="btn btn-ghost" href="#servicios">Ver servicios</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="section-title">
+        <div>
+          <h2>Contacto</h2>
+          <p>Contame tu rubro y tu objetivo. Te respondo con un diagnóstico y un plan de acción concreto.</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <form class="form" id="leadForm">
+            <div class="grid grid-2">
+              <div>
+                <label for="nombre" style="font-size:13px;color:rgba(233,232,255,.72);">Nombre</label>
+                <input id="nombre" name="nombre" placeholder="Tu nombre" required />
+              </div>
+              <div>
+                <label for="empresa" style="font-size:13px;color:rgba(233,232,255,.72);">Empresa</label>
+                <input id="empresa" name="empresa" placeholder="Tu negocio" />
+              </div>
+            </div>
+
+            <div class="grid grid-2">
+              <div>
+                <label for="servicio" style="font-size:13px;color:rgba(233,232,255,.72);">Interés principal</label>
+                <select id="servicio" name="servicio">
+                  <option value="Plan 90 días">Plan 90 días</option>
+                  <option value="Web profesional">Web profesional</option>
+                  <option value="Meta Ads">Meta Ads</option>
+                  <option value="TikTok Ads">TikTok Ads</option>
+                  <option value="WhatsApp/CRM">WhatsApp/CRM</option>
+                  <option value="Contenido & CM">Contenido & CM</option>
+                </select>
+              </div>
+              <div>
+                <label for="telefono" style="font-size:13px;color:rgba(233,232,255,.72);">WhatsApp</label>
+                <input id="telefono" name="telefono" placeholder="+54 ..." />
+              </div>
+            </div>
+
+            <div>
+              <label for="mensaje" style="font-size:13px;color:rgba(233,232,255,.72);">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Contame qué vendés, zona y objetivo (ventas, mayoristas, turnos, etc.)"></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Enviar (demo)</button>
+
+            <p class="note">
+              Esto es un formulario demo. Si querés, lo conecto a WhatsApp, Email o Google Sheets (según tu stack).
+            </p>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>CTAs listos para vender</h3>
+          <p>Podés reemplazar estos links por tus canales reales (WhatsApp, Calendly, Instagram).</p>
+
+          <div class="hero-actions" style="margin-top:14px;">
+            <!-- Reemplazá el número por el tuyo -->
+            <a class="btn btn-primary" id="waLink" href="#" target="_blank" rel="noopener">Escribirme por WhatsApp</a>
+            <a class="btn btn-ghost" href="#planes">Ver plan 90 días</a>
+          </div>
+
+          <div class="tagrow" style="margin-top:14px;">
+            <span class="tag">Branding</span>
+            <span class="tag">CRO</span>
+            <span class="tag">Performance</span>
+            <span class="tag">Automations</span>
+          </div>
+
+          <p class="note" style="margin-top:14px;">
+            Tip: si vendés B2B (mayoristas), tu web debe llevar siempre a un CTA directo:
+            “pedir lista”, “solicitar cotización”, “agendar llamada”.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="inner">
+        <div>© <span id="year"></span> KeyVox — Agencia de Marketing Digital</div>
+        <div><img src="keyvoxlogo.png" alt="KeyVox logo" style="height:100px;width:auto;"></div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="#servicios">Servicios</a>
+          <a href="#metodo">Método</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // === CONFIG ===
+    // Reemplazá por tu número real en formato internacional (sin + ni espacios)
+    const WHATSAPP_NUMBER = "5491100000000"; // ejemplo: 54911XXXXXXXXX
+
+    function buildWhatsAppLink(message){
+      const base = "https://wa.me/" + WHATSAPP_NUMBER;
+      const text = encodeURIComponent(message || "Hola KeyVox, quiero un diagnóstico para mi negocio.");
+      return base + "?text=" + text;
+    }
+
+    function prefillPlan(planName){
+      const sel = document.getElementById("servicio");
+      const msg = document.getElementById("mensaje");
+      if(sel) sel.value = planName.includes("Mantenimiento") ? "Contenido & CM" : "Plan 90 días";
+      if(msg) msg.value = `Hola KeyVox, quiero avanzar con: ${planName}. Mi objetivo es: `;
+      document.getElementById("contacto").scrollIntoView({behavior:"smooth"});
+    }
+
+    // Set WA link
+    const wa = document.getElementById("waLink");
+    wa.href = buildWhatsAppLink("Hola KeyVox, quiero un diagnóstico y un plan 90 días. Mi negocio es: ");
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Demo form submit
+    document.getElementById("leadForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value || "";
+      const empresa = document.getElementById("empresa").value || "";
+      const servicio = document.getElementById("servicio").value || "";
+      const tel = document.getElementById("telefono").value || "";
+      const mensaje = document.getElementById("mensaje").value || "";
+
+      const full = `Hola KeyVox, soy ${nombre}${empresa ? " ("+empresa+")" : ""}. ` +
+                   `Me interesa: ${servicio}. ` +
+                   `${tel ? "Mi WhatsApp es: "+tel+". " : ""}` +
+                   `Mensaje: ${mensaje}`;
+
+      window.open(buildWhatsAppLink(full), "_blank");
+    });
+  </script>
+</body>
+</html>

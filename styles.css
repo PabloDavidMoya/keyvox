@@ -113,33 +113,6 @@ a{
   letter-spacing:.2px;
 }
 
-.logo{
-  width:40px;
-  height:40px;
-  border-radius:14px;
-  background:
-    radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.25), transparent 55%),
-    linear-gradient(135deg, rgba(168,85,247,1), rgba(59,130,246,1));
-  box-shadow: 0 10px 30px rgba(168,85,247,.20), 0 10px 30px rgba(59,130,246,.18);
-  position:relative;
-  overflow:hidden;
-}
-
-.logo::after{
-  content:"";
-  position:absolute;
-  inset:-40%;
-  background: conic-gradient(from 180deg, rgba(255,255,255,.0), rgba(255,255,255,.25), rgba(255,255,255,.0));
-  transform: rotate(15deg);
-  animation: shimmer 6.5s linear infinite;
-  opacity:.7;
-}
-
-@keyframes shimmer{
-  0%{transform:translateX(-25%) rotate(15deg)}
-  100%{transform:translateX(25%) rotate(15deg)}
-}
-
 .nav-links{
   display:flex;
   gap:16px;
@@ -475,7 +448,6 @@ section{
 }
 
 .price b{font-size:22px}
-
 .price small{color:rgba(233,232,255,.70)}
 
 .list{

@@ -32,7 +32,7 @@ body{
   overflow-x:hidden;
 }
 
-body:before{
+body::before{
   content:"";
   position:fixed;
   inset:0;
@@ -53,13 +53,38 @@ a{
   z-index:1;
 }
 
-/* INTRO GIF */
+/* INTRO VIDEO */
+#gifIntro{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  z-index:9999;
+  opacity:1;
+  visibility:visible;
+}
+
 #gifIntro video{
-  max-width:900px;
-  max-height:90vh;
+  display:block;
   width:auto;
   height:auto;
+  max-width:900px;
+  max-height:90vh;
+  object-fit:contain;
 }
+
+.ocultar-intro{
+  opacity:0 !important;
+  pointer-events:none;
+  visibility:hidden;
+  transition:opacity 1.2s ease, visibility 1.2s ease;
+}
+
 /* NAV */
 .nav{
   position:sticky;
@@ -100,7 +125,7 @@ a{
   overflow:hidden;
 }
 
-.logo:after{
+.logo::after{
   content:"";
   position:absolute;
   inset:-40%;
@@ -261,7 +286,7 @@ h1{
   overflow:hidden;
 }
 
-.hero-card:before{
+.hero-card::before{
   content:"";
   position:absolute;
   inset:-2px;
@@ -403,7 +428,7 @@ section{
   min-height:44px;
 }
 
-.step:before{
+.step::before{
   counter-increment: step;
   content: counter(step);
   position:absolute;
@@ -559,6 +584,13 @@ footer .inner{
   .grid-2{grid-template-columns:1fr}
   .contact{grid-template-columns:1fr}
   .nav-links{display:none}
+
+  #gifIntro video{
+    max-width:100vw;
+    max-height:100vh;
+    width:100%;
+    height:auto;
+  }
 }
 
 /* floating lights */
